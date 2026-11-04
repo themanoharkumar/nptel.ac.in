@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Personal Achievement Record</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; background: #fff; color: #222; }
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 22px; font-family: Arial, sans-serif; }
+    .notice { width: min(900px, 100%); margin-bottom: 14px; padding: 10px 14px; border: 1px solid #d9b8b8; background: #fff8f8; color: #75252b; text-align: center; font-size: 13px; line-height: 1.45; }
+    .image-wrapper { display: flex; justify-content: center; align-items: center; max-width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    .image-wrapper img { max-height: calc(100vh - 125px); max-width: min(92vw, 1100px); width: auto; height: auto; object-fit: contain; display: block; }
+    .not-found { display: none; max-width: 620px; padding: 36px; border: 1px solid #ddd; text-align: center; line-height: 1.6; }
+    .not-found h1 { margin-bottom: 10px; font-size: 22px; }
+    @media (max-width: 600px) { body { padding: 12px; } .notice { font-size: 12px; } .image-wrapper img { max-width: 96vw; max-height: calc(100vh - 110px); } }
+  </style>
+</head>
+<body>
+  <div class="notice" id="notice">
+    Independent personal achievement record. This page is not issued, hosted, verified, or endorsed by NPTEL or any educational institution.
+  </div>
+  <main class="image-wrapper" id="record">
+    <!-- Keep this image in the deployed project root with this exact filename. -->
+    <img src="/NOC-136Y-TF7D-48PB2.jpg" alt="Unofficial personal achievement record" />
+  </main>
+  <section class="not-found" id="not-found" role="status">
+    <h1>Record not found</h1>
+    <p>This independent personal record ID is not available.</p>
+  </section>
+  <script>
+    // Only this independently assigned record ID is configured for this page.
+    const allowedRecordId = 'MAN-NLP-2026-001';
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const isHome = parts.length === 0;
+    const isRecordRoute = parts.length === 2 && parts[0] === 'verify' && parts[1] === allowedRecordId;
+    if (!isHome && !isRecordRoute) {
+      document.getElementById('record').style.display = 'none';
+      document.getElementById('notice').style.display = 'none';
+      document.getElementById('not-found').style.display = 'block';
+      document.title = 'Record Not Found';
+    } else if (isRecordRoute) {
+      document.title = 'Personal Achievement Record — ' + allowedRecordId;
+    }
+  </script>
+</body>
+</html>
